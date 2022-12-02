@@ -5,10 +5,12 @@ credit to AlexeSimon for the code
 # Advent of code working directories creator
 # IMPORTANT Remember to edit the USER_SESSION_ID & author values with yours
 # uses requests module. If not present use pip install requests
-
+from dotenv import load_dotenv
+load_dotenv()
+import os, sys
 # USER SPECIFIC PARAMETERS
 base_pos = "./"            # Folders will be created here. If you want to make a parent folder, change this to ex "./adventofcode/"
-USER_SESSION_ID = ""       # Get your session by inspecting the session cookie content in your web browser while connected to adventofcode and paste it here as plain text in between the ". Leave at is to not download inputs.
+USER_SESSION_ID = os.environ.get('COOKIE')       # Get your session by inspecting the session cookie content in your web browser while connected to adventofcode and paste it here as plain text in between the ". Leave at is to not download inputs.
 DOWNLOAD_STATEMENTS = True # Set to false to not download statements. Note that only part one is downloaded (since you need to complete it to access part two)
 DOWNLOAD_INPUTS = True     # Set to false to not download inputs. Note that if the USER_SESSION_ID is wrong or left empty, inputs will not be downloaded.
 MAKE_CODE_TEMPLATE = True  # Set to false to not make code templates. Note that even if OVERWRITE is set to True, it will never overwrite codes.
@@ -18,7 +20,7 @@ OVERWRITE = False          # If you really need to download the whole thing agai
 
 # DATE SPECIFIC PARAMETERS
 date = "December 2022"              # Date automatically put in the code templates.
-starting_advent_of_code_year = 2021 # You can go as early as 2015.
+starting_advent_of_code_year = 2022 # You can go as early as 2015.
 last_advent_of_code_year = 2022     # The setup will download all advent of code data up until that date included
 last_advent_of_code_day = 25         # If the year isn't finished, the setup will download days up until that day included for the last year
 # Imports
@@ -35,6 +37,7 @@ years = range(starting_advent_of_code_year, last_advent_of_code_year+1)
 days = range(1,26)
 link = "https://adventofcode.com/" # ex use : https://adventofcode.com/2017/day/19/input
 USER_AGENT = "adventofcode_working_directories_creator"
+print(os.environ.get('COOKIE') )
 
 print("Setup will download data and create working directories and files for adventofcode.")
 if not os.path.exists(base_pos):
@@ -51,7 +54,7 @@ for y in years:
         day_pos = year_pos+"/"+str(d)
         if MAKE_CODE_TEMPLATE and not os.path.exists(day_pos+"/code.py"):
             code = open(day_pos+"/code.py", "w+")
-            code.write("# Advent of code Year "+str(y)+" Day "+str(d)+" solution\n# Author = "+author+"\n# Date = "+date+"\n\nwith open((__file__.rstrip(\"code.py\")+\"input.txt\"), 'r') as input_file:\n    input = input_file.read()\n\n\n\nprint(\"Part One : \"+ str(None))\n\n\n\nprint(\"Part Two : \"+ str(None))")
+            code.write("# Advent of code Year "+str(y)+" Day "+str(d)+" solution\n# Author = "+author+"\n# Date = "+date+"\n\nwith open((__file__.rstrip(\"code.py\")+\"input.txt\"), 'r') as input_file:\n    input = input_file.readlines()\n\n\n\nprint(\"Part One : \"+ str(None))\n\n\n\nprint(\"Part Two : \"+ str(None))")
             code.close()
         if DOWNLOAD_INPUTS and (not os.path.exists(day_pos+"/input.txt") or OVERWRITE)and USER_SESSION_ID != "":
             done = False
