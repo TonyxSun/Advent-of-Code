@@ -8,6 +8,8 @@ credit to AlexeSimon for the code
 from dotenv import load_dotenv
 load_dotenv()
 import os, sys
+from datetime import datetime
+
 # USER SPECIFIC PARAMETERS
 base_pos = "./"            # Folders will be created here. If you want to make a parent folder, change this to ex "./adventofcode/"
 USER_SESSION_ID = os.environ.get('COOKIE')       # Get your session by inspecting the session cookie content in your web browser while connected to adventofcode and paste it here as plain text in between the ". Leave at is to not download inputs.
@@ -22,7 +24,7 @@ OVERWRITE = False          # If you really need to download the whole thing agai
 date = "December 2022"              # Date automatically put in the code templates.
 starting_advent_of_code_year = 2022 # You can go as early as 2015.
 last_advent_of_code_year = 2022     # The setup will download all advent of code data up until that date included
-last_advent_of_code_day = 25         # If the year isn't finished, the setup will download days up until that day included for the last year
+last_advent_of_code_day = int(datetime.today().strftime('%d'))   # If the year isn't finished, the setup will download days up until that day included for the last year
 # Imports
 import os
 import datetime
