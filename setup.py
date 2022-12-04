@@ -1,5 +1,5 @@
 """
-credit to AlexeSimon for the code
+credit to AlexeSimon
 """
 
 # Advent of code working directories creator
