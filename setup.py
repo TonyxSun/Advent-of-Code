@@ -21,7 +21,7 @@ author = "TonyxSun"               # Name automatically put in the code templates
 OVERWRITE = False          # If you really need to download the whole thing again, set this to true. As the creator said, AoC is fragile; please be gentle. Statements and Inputs do not change. This will not overwrite codes.
 
 # DATE SPECIFIC PARAMETERS
-date = "December 2022"              # Date automatically put in the code templates.
+date = "December " + int(datetime.today().strftime('%d')) + ", 2022"              # Date automatically put in the code templates.
 starting_advent_of_code_year = 2022 # You can go as early as 2015.
 last_advent_of_code_year = 2022     # The setup will download all advent of code data up until that date included
 last_advent_of_code_day = int(datetime.today().strftime('%d'))   # If the year isn't finished, the setup will download days up until that day included for the last year
@@ -56,7 +56,7 @@ for y in years:
         day_pos = year_pos+"/"+str(d)
         if MAKE_CODE_TEMPLATE and not os.path.exists(day_pos+"/code.py"):
             code = open(day_pos+"/code.py", "w+")
-            code.write("# Advent of code Year "+str(y)+" Day "+str(d)+" solution\n# Author = "+author+"\n# Date = "+date+"\n\nwith open((__file__.rstrip(\"code.py\")+\"input.txt\"), 'r') as input_file:\n    input = input_file.readlines()\n\n\n\nprint(\"Part One : \"+ str(None))\n\n\n\nprint(\"Part Two : \"+ str(None))")
+            code.write("# Advent of code Year "+str(y)+" Day "+str(d)+" solution\n# Author = "+author+"\n# Link = "+link+str(y)+"/day/"+str(d)+"\n# Date = "+date+"\n\nwith open((__file__.rstrip(\"code.py\")+\"input.txt\"), 'r') as input_file:\n    input = input_file.readlines()\n\n\n\nprint(\"Part One : \"+ str(None))\n\n\n\nprint(\"Part Two : \"+ str(None))")
             code.close()
         if DOWNLOAD_INPUTS and (not os.path.exists(day_pos+"/input.txt") or OVERWRITE)and USER_SESSION_ID != "":
             done = False
